@@ -115,3 +115,12 @@ def pandaPart(request):
     Spring_interpol = data_interpol[data_interpol.index.month.isin([4,5])].median()
     Summer_interpol = data_interpol[data_interpol.index.month.isin([6,7,8,9])].median()
     Fall_interpol = data_interpol[data_interpol.index.month.isin([10,11])].median()
+
+    # ---------------- mean of weekend / weekday ------------
+    # with initial data: data_df2
+    Weekday_data = data_df2[data_df2.index.weekday.isin([0,1,2,3,4])].mean() #52.093406
+    Weekend_data = data_df2[data_df2.index.weekday.isin([5,6])].mean()
+    # with interpolated dara: data_interpol
+    Weekday_interpol = data_interpol[data_interpol.index.weekday.isin([0,1,2,3,4])].mean()
+    Weekend_interpol = data_interpol[data_interpol.index.weekday.isin([5,6])].mean()
+
