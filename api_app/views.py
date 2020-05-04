@@ -89,3 +89,10 @@ def co2_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 def pandaPart(request): 
+    #--------- interpolate data and save result in csv file -----------------
+    data = Co2.objects.all().values('datetime', 'co2_rate') 
+    data_df = pd.DataFrame(data) # convert data(d) to panda dataframe  
+    data_df['datetime'] = pd.to_datetime(data_df['datetime'], utc=True) # convert data's datetime field to datetime format
+    data_df2 = data_df.set_index('datetime')  # set datetime field as dataframe's index
+    data_interpol = data_df2.resample('15T').mean().interpolate('linear')  # resample - mean - interpolate data to deal with missing values (nan)
+    data_interpol.to_csv('data_interpol.csv', sep=';') # save data interpolated in csv format
