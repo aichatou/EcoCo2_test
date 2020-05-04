@@ -88,5 +88,4 @@ def co2_detail(request, pk):
         co2.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-        
-    
+def pandaPart(request): 
