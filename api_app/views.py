@@ -44,3 +44,20 @@ class Co2Serializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Co2(**validated_data)   
+
+@api_view(['GET', 'POST'])
+def co2_list(request):
+    """
+    List all code co2s, or create a new hat.
+    """
+    if request.method == 'GET':
+        co2s = Co2.objects.all()
+        serializer = Co2Serializer(co2s, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = Co2Serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
