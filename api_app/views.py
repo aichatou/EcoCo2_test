@@ -124,3 +124,18 @@ def pandaPart(request):
     Weekday_interpol = data_interpol[data_interpol.index.weekday.isin([0,1,2,3,4])].mean()
     Weekend_interpol = data_interpol[data_interpol.index.weekday.isin([5,6])].mean()
 
+
+	#-------------- csv file ------------------------------------------------------------------------------
+    # get csv data
+    csvData = pd.read_csv('eco2mix-national-cons-def.csv', sep=';') # read data from csv file
+    datetime = list(csvData['Date et Heure']) # get date field from csvData and convert to list format
+    co2 = list(csvData['Taux de CO2 (g/kWh)']) # read co2 field from csvData and convert to list format
+    d = {'datetime': datetime, 'co2': co2} # put datetime and co2 in a dictionnary 
+    # interpolate data and save result in csv file 
+    csv_data_df = pd.DataFrame(d) 
+    csv_data_df['datetime'] = pd.to_datetime(data_df['datetime'], utc=True)
+    csv_data_df2 = data_df.set_index('datetime')
+    csv_data_interpol = data_df2.resample('15T').mean().interpolate('linear') 
+    csv_data_interpol.to_csv('csv_data_interpol.csv', sep=';') 
+    # calculate co2 production
+    co2Prod = data_interpol.sum()
