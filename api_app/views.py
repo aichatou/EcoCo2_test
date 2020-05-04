@@ -138,4 +138,12 @@ def pandaPart(request):
     csv_data_interpol = data_df2.resample('15T').mean().interpolate('linear') 
     csv_data_interpol.to_csv('csv_data_interpol.csv', sep=';') 
     # calculate co2 production
-    co2Prod = data_interpol.sum()
+    co2Prod = data_interpol.sum()  
+	
+	text = "<h1> Successful operations<br> Results files (co2data.png, csv_data_interpol.csv, data_interpol.csv )can be shown in api_app folder<br> </h1>"
+    text += "<h1> Consommation Co2: " + str(list(co2Prod)[0]) + "</h1>"
+    text +=  "<h1> Moyenne weekday: " + str(list(Weekday_data)[0]) + "</h1>" + "<h1> Moyenne weekend: " + str(list(Weekend_data)[0]) + "</h1>"
+    text +=  "<h1> Moyenne weekday (interpolated data): " + str(list(Weekday_interpol)[0]) + "</h1>" + "<h1> Moyenne weekend (interpolated data): " + str(list(Weekend_interpol)[0]) + "</h1>"
+    text +=  "<h1> Mediane season: Winter, Spring, Summer, Fall:  " + str(list(Winter)[0]) + ", " + str(list(Spring)[0]) + ", " + str(list(Summer)[0]) + ", " + str(list(Fall)[0]) + "</h1>" 
+    text +=  "<h1> Mediane season (interpolated data): Winter, Spring, Summer, Fall: " + str(list(Winter_interpol)[0]) + ", " + str(list(Spring_interpol)[0]) + ", " + str(list(Summer_interpol)[0]) + ", " + str(list(Fall_interpol)[0]) + "</h1>" 
+    return HttpResponse(text) 
