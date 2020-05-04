@@ -6,3 +6,5 @@ import json
 from api_app.models import Co2
 
 
+class Co2Api(APITestCase):
+
