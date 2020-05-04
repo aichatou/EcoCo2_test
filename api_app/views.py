@@ -97,9 +97,21 @@ def pandaPart(request):
     data_interpol = data_df2.resample('15T').mean().interpolate('linear')  # resample - mean - interpolate data to deal with missing values (nan)
     data_interpol.to_csv('data_interpol.csv', sep=';') # save data interpolated in csv format
 	
-	    #----------- data difference --------------------------
+	#----------- data difference --------------------------
     data_diff = data_df2.sub(data_interpol) # difference between data_df2 and data_interpol 
     # plot data_diff and save it in png file 
     plt.figure() 
     data_diff.plot()
     plt.savefig("co2data.png")   
+
+	#--------- median of each season -----------------------
+    # with initial data: data_df2
+    Winter = data_df2[data_df2.index.month.isin([12,1,2,3])].median()
+    Spring = data_df2[data_df2.index.month.isin([4,5])].median()
+    Summer = data_df2[data_df2.index.month.isin([6,7,8,9])].median()
+    Fall = data_df2[data_df2.index.month.isin([10,11])].median()
+    # with interpolated dara: data_interpol
+    Winter_interpol = data_interpol[data_interpol.index.month.isin([12,1,2,3])].median()
+    Spring_interpol = data_interpol[data_interpol.index.month.isin([4,5])].median()
+    Summer_interpol = data_interpol[data_interpol.index.month.isin([6,7,8,9])].median()
+    Fall_interpol = data_interpol[data_interpol.index.month.isin([10,11])].median()
