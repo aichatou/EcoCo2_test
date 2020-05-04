@@ -32,3 +32,11 @@ class Co2Api(APITestCase):
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_create_valid_co2(self):
+        response = self.client.post(
+            self.list_url,
+            data=json.dumps(self.valid_co2),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
