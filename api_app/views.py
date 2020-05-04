@@ -34,3 +34,13 @@ def get_data(request):  # used only once to get and save data in postgresql data
     return HttpResponse("<h1> Data load: Success</h1>")  # print a success message  
     
       
+# ------------------- Co2 serializer class ----------------------------------------------------------------------------
+class Co2Serializer(serializers.ModelSerializer): 
+
+    datetime = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S") # redefine datetime in order to specify date format
+    class Meta:
+        model = Co2
+        fields = ['datetime', 'co2_rate']  #'__all__' #
+
+    def create(self, validated_data):
+        return Co2(**validated_data)   
