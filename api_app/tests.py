@@ -40,3 +40,11 @@ class Co2Api(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_create_invalid_co2(self):
+        response = self.client.post(
+            self.list_url,
+            data=json.dumps(self.invalid_co2),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
