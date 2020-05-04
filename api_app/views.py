@@ -96,3 +96,10 @@ def pandaPart(request):
     data_df2 = data_df.set_index('datetime')  # set datetime field as dataframe's index
     data_interpol = data_df2.resample('15T').mean().interpolate('linear')  # resample - mean - interpolate data to deal with missing values (nan)
     data_interpol.to_csv('data_interpol.csv', sep=';') # save data interpolated in csv format
+	
+	    #----------- data difference --------------------------
+    data_diff = data_df2.sub(data_interpol) # difference between data_df2 and data_interpol 
+    # plot data_diff and save it in png file 
+    plt.figure() 
+    data_diff.plot()
+    plt.savefig("co2data.png")   
