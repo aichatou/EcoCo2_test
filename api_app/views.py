@@ -61,7 +61,7 @@ def co2_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-		
+        
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def co2_detail(request, pk):  
@@ -96,15 +96,15 @@ def pandaPart(request):
     data_df2 = data_df.set_index('datetime')  # set datetime field as dataframe's index
     data_interpol = data_df2.resample('15T').mean().interpolate('linear')  # resample - mean - interpolate data to deal with missing values (nan)
     data_interpol.to_csv('data_interpol.csv', sep=';') # save data interpolated in csv format
-	
-	#----------- data difference --------------------------
+    
+    #----------- data difference --------------------------
     data_diff = data_df2.sub(data_interpol) # difference between data_df2 and data_interpol 
     # plot data_diff and save it in png file 
     plt.figure() 
     data_diff.plot()
     plt.savefig("co2data.png")   
 
-	#--------- median of each season -----------------------
+    #--------- median of each season -----------------------
     # with initial data: data_df2
     Winter = data_df2[data_df2.index.month.isin([12,1,2,3])].median()
     Spring = data_df2[data_df2.index.month.isin([4,5])].median()
@@ -125,7 +125,7 @@ def pandaPart(request):
     Weekend_interpol = data_interpol[data_interpol.index.weekday.isin([5,6])].mean()
 
 
-	#-------------- csv file ------------------------------------------------------------------------------
+    #-------------- csv file ------------------------------------------------------------------------------
     # get csv data
     csvData = pd.read_csv('eco2mix-national-cons-def.csv', sep=';') # read data from csv file
     datetime = list(csvData['Date et Heure']) # get date field from csvData and convert to list format
@@ -139,8 +139,8 @@ def pandaPart(request):
     csv_data_interpol.to_csv('csv_data_interpol.csv', sep=';') 
     # calculate co2 production
     co2Prod = data_interpol.sum()  
-	
-	text = "<h1> Successful operations<br> Results files (co2data.png, csv_data_interpol.csv, data_interpol.csv )can be shown in api_app folder<br> </h1>"
+    
+    text = "<h1> Successful operations<br> Results files (co2data.png, csv_data_interpol.csv, data_interpol.csv )can be shown in api_app folder<br> </h1>"
     text += "<h1> Consommation Co2: " + str(list(co2Prod)[0]) + "</h1>"
     text +=  "<h1> Moyenne weekday: " + str(list(Weekday_data)[0]) + "</h1>" + "<h1> Moyenne weekend: " + str(list(Weekend_data)[0]) + "</h1>"
     text +=  "<h1> Moyenne weekday (interpolated data): " + str(list(Weekday_interpol)[0]) + "</h1>" + "<h1> Moyenne weekend (interpolated data): " + str(list(Weekend_interpol)[0]) + "</h1>"
