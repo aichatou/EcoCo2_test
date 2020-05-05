@@ -18,15 +18,16 @@ Activate the virtualenv (go to 'virtualenv_name' folder):<br />
 2: Install requirements (go to manage.py folder):<br />
 > pip install -r requirements/base.txt<br />
 
-3: Configure database in settings file according to your local database (must be a postgresql db) and run :<br />
+3: Configure database in settings file according to your local database (must be a postgresql db) <br /> 
+
+4: Run <br/>:
 > python manage.py makemigrations<br />
 > python manage.py migrate (to create the api_app models)<br />
 > python manage createsuperuser<br />
 
-4.Go to api_app/urls.py folder and uncomment the line 'path('datas/', get_data, name='get_data')'<br />
 
 5.Run  server (python manage.py runserver) and visit http://127.0.0.1:8000/api_app/datas (this process will load data in your database) <br />
-After you see a 'Data load: Success' message, comment again the path line in url file<br />
+You must see after few minutes a 'Data load: Success' message<br />
 
 Visit http://127.0.0.1:8000/api_app/panda and you will see some results<br />
 
