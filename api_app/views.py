@@ -25,7 +25,12 @@ def get_data(request):  # used only once to get and save data in postgresql data
             return HttpResponse("<h1> Data load: Fail</h1>")  # print error message
         obj = Co2()  # create empty Co2 data_object
         obj.datetime = item['datetime']  # add datetime value to obj
-        obj.co2_rate = item['co2_rate']  # add co2_rate value to obj
+        obj.co2_rate = item['co2_rate']  # add co2_rate value to obj 
+        existObjs = Co2.objects.filter(datetime = obj.datetime, co2_rate=obj.co2_rate)
+        if len(list(existObjs)) > 0:
+             pass
+        else:
+             obj.save()
         obj.save()  # save obj in database
     return HttpResponse("<h1> Data load: Success</h1>")  # print a success message
 
