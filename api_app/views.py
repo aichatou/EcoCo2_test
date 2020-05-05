@@ -47,7 +47,7 @@ class Co2Serializer(serializers.ModelSerializer):
 @api_view(['GET', 'POST'])
 def co2_list(request):
     """
-    List all code co2s, or create a new hat.
+    List all code co2s, or create a new co2.
     """
     if request.method == 'GET':
         co2s = Co2.objects.all()
@@ -141,7 +141,7 @@ def pandaPart(request):
     # calculate co2 production
     co2Prod = data_interpol.sum()
 
-    text = "<h1> Successful operations<br> Results files (co2data.png, csv_data_interpol.csv, data_interpol.csv )can be shown in api_app folder<br> </h1>"
+    text = "<h1> Successful operations<br> Results files (co2data.png, csv_data_interpol.csv, data_interpol.csv )can be shown in api_project folder<br> </h1>"
     text += "<h1> Consommation Co2: " + str(list(co2Prod)[0]) + "</h1>"
     text += "<h1> Moyenne weekday: " + \
         str(list(Weekday_data)[0]) + "</h1>" + "<h1> Moyenne weekend: " + str(list(Weekend_data)[0]) + "</h1>"
