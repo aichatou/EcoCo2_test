@@ -120,7 +120,7 @@ def pandaPart(request):
 
     # -------------- csv file ------------------------------------------------------------------------------
     # get csv data
-    csvData = pd.read_csv('eco2mix-national-cons-def.csv', sep=';')  # read data from csv file
+    csvData = pd.read_csv('data/eco2mix-national-cons-def.csv', sep=';')  # read data from csv file
     datetime = list(csvData['Date et Heure'])  # get date field from csvData and convert to list format
     co2 = list(csvData['Taux de CO2 (g/kWh)'])  # read co2 field from csvData and convert to list format
     d = {'datetime': datetime, 'co2': co2}  # put datetime and co2 in a dictionnary
