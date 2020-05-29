@@ -26,12 +26,12 @@ def get_data(request):  # used only once to get and save data in sqlite database
             return HttpResponse("<h1> Data load: Fail</h1>")  # print error message
         obj = Co2()  # create empty Co2 data_object
         obj.datetime = item['datetime']  # add datetime value to obj
-        obj.co2_rate = item['co2_rate']  # add co2_rate value to obj 
-        existObjs = Co2.objects.filter(datetime = obj.datetime, co2_rate=obj.co2_rate)
+        obj.co2_rate = item['co2_rate']  # add co2_rate value to obj
+        existObjs = Co2.objects.filter(datetime=obj.datetime, co2_rate=obj.co2_rate)
         if len(list(existObjs)) > 0:
-             pass
+            pass
         else:
-             obj.save()
+            obj.save()
         obj.save()  # save obj in database
     return render(request, 'load_data_message.html')  # print a success message
 
@@ -107,7 +107,7 @@ def pandaPart(request):
     Spring = data_df2[data_df2.index.month.isin([4, 5])].median()
     Summer = data_df2[data_df2.index.month.isin([6, 7, 8, 9])].median()
     Fall = data_df2[data_df2.index.month.isin([10, 11])].median()
-    # with interpolated dara: data_interpol
+    # with interpolated data: data_interpol
     Winter_interpol = data_interpol[data_interpol.index.month.isin([12, 1, 2, 3])].median()
     Spring_interpol = data_interpol[data_interpol.index.month.isin([4, 5])].median()
     Summer_interpol = data_interpol[data_interpol.index.month.isin([6, 7, 8, 9])].median()
@@ -117,7 +117,7 @@ def pandaPart(request):
     # with initial data: data_df2
     Weekday_data = data_df2[data_df2.index.weekday.isin([0, 1, 2, 3, 4])].mean()  # 52.093406
     Weekend_data = data_df2[data_df2.index.weekday.isin([5, 6])].mean()
-    # with interpolated dara: data_interpol
+    # with interpolated data: data_interpol
     Weekday_interpol = data_interpol[data_interpol.index.weekday.isin([0, 1, 2, 3, 4])].mean()
     Weekend_interpol = data_interpol[data_interpol.index.weekday.isin([5, 6])].mean()
 
