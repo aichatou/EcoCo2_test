@@ -94,9 +94,11 @@ def pandaPart(request):
     # ----------- data difference --------------------------
     data_diff = data_df2.sub(data_interpol)  # difference between data_df2 and data_interpol
     # plot data_diff and save it in png file
-    plt.figure()
+    # plt.figure()
     data_diff.plot()
-    plt.savefig("co2data.png")
+    plt.savefig("static/datadiff.png")
+    data_diff_by_week.plot()
+    plt.savefig("static/datadiff_resize_ByWeek.png")
 
     # --------- median of each season -----------------------
     # with initial data: data_df2
