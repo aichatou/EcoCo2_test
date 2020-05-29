@@ -9,32 +9,28 @@ api_app is a django application for dealing with api and panda<br />
 
 Quick start
 -----------
-1: Create a virtual env:<br />
-> pip install virtualenv<br />
+1: Go to EcoCo2_test-master folder and create a new virtual env:<br />
+> pip install virtualenv (if necessary)<br />
 > virtualenv 'virtualenv_name'<br />
 Activate the virtualenv (go to 'virtualenv_name' folder):<br />
 > virtualenv_name/bin/activate (or virtualenv_name\Scripts\activate for Win Os)<br />
 
-2: Install requirements (go to manage.py folder):<br />
-> pip install -r requirements/base.txt<br />
+2: Install requirements (be sure you are in manage.py folder):<br />
+> pip install -r requirements/base.txt (if some errors, try to install package one by one with 'pip install package_name' command)<br />
 
-3: Configure database in settings file according to your local database (must be a postgresql db) <br /> 
-
-4: Run <br/>:
-> python manage.py makemigrations<br />
-> python manage.py migrate (to create the api_app models)<br />
+3: Create a superuser for managing data in django admin interface <br/>:
 > python manage createsuperuser<br />
 
 
-5.Run  server (python manage.py runserver) and visit http://127.0.0.1:8000/api_app/datas (this process will load data in your database) <br />
-You must see after few minutes a 'Data load: Success' message<br />
+4.Run  server (python manage.py runserver) (if some errors, try 'python manage.py check' command for more details)
+and visit http://127.0.0.1:8000/api_app/panda, you will see some results<br />
+(List of datas are displayed on  http://127.0.0.1:8000/api_app/co2List/ ) </br>
 
-Visit http://127.0.0.1:8000/api_app/panda and you will see some results<br />
-
-6. To run test (go to manage.py folder and run):<br />
+5. To run test (go to manage.py folder and run):<br />
 > tox <br />
 
-7. Run test with flake8<br />
+6. Run flake8 test (optional) <br />
 > flake8 api_app/views.py (for example)<br />
- Resolve if necessary flake8 errors with autopep8 command<br />
+ Resolve if necessary flake8 errors with autopep8 --in-place command<br />
+
  
