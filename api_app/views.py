@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 # ---------------------------------- django block --------------------------------------------------------------------------
 # get 2017 and 2018 data from api
-def get_data(request):  # used only once to get and save data in postgresql database
+def get_data(request):  # used only once to get and save data in sqlite database
     start = int((datetime.datetime(2017, 1, 1) - datetime.datetime(1970, 1, 1)
                  ).total_seconds())  # start date (2017/01/01)
     end = int((datetime.datetime(2018, 12, 31) - datetime.datetime(1970, 1, 1)).total_seconds())  # end date (2018/12/31)

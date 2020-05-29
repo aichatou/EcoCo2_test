@@ -86,19 +86,12 @@ WSGI_APPLICATION = 'api_project.wsgi.application'
 
 DATABASES = {
     'default': { 
-	
-		'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-		'NAME': 'dataCo2', 
-		'USER': 'aicha',
-		'PASSWORD': '',
-		'HOST': 'localhost',
-		'PORT': '5432', 
-		'TEST': {
+            
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'TEST': {
             'NAME': 'ecoCo2testdb',
         },
-		
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
