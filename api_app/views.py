@@ -89,7 +89,7 @@ def pandaPart(request):
     data_df2 = data_df.set_index('datetime')  # set datetime field as dataframe's index
     # resample - mean - interpolate data to deal with missing values (nan)
     data_interpol = data_df2.resample('15T').mean().interpolate('linear')
-    data_interpol.to_csv('data_interpol.csv', sep=';')  # save data interpolated in csv format
+    data_interpol.to_csv('results/data_interpol.csv', sep=';')  # save data interpolated in csv format
 
     # ----------- data difference --------------------------
     data_diff = data_df2.sub(data_interpol)  # difference between data_df2 and data_interpol
@@ -129,7 +129,7 @@ def pandaPart(request):
     csv_data_df['datetime'] = pd.to_datetime(data_df['datetime'], utc=True)
     csv_data_df2 = data_df.set_index('datetime')
     csv_data_interpol = csv_data_df2.resample('15T').mean().interpolate('linear')
-    csv_data_interpol.to_csv('csv_data_interpol.csv', sep=';')
+    csv_data_interpol.to_csv('results/csv_data_interpol.csv', sep=';')
     # calculate co2 production
     co2Prod = csv_data_interpol.sum()
 
