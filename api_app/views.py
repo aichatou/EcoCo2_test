@@ -33,7 +33,7 @@ def get_data(request):  # used only once to get and save data in sqlite database
         else:
              obj.save()
         obj.save()  # save obj in database
-    return HttpResponse("<h1> Data load: Success</h1>")  # print a success message
+    return render(request, 'load_data_message.html')  # print a success message
 
 
 @api_view(['GET', 'POST'])
