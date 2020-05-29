@@ -1,5 +1,5 @@
 from .models import Co2
-from rest_framework import serializers
+from .serializers import Co2Serializer
 import datetime
 import pandas as pd
 import requests
@@ -33,20 +33,6 @@ def get_data(request):  # used only once to get and save data in sqlite database
              obj.save()
         obj.save()  # save obj in database
     return HttpResponse("<h1> Data load: Success</h1>")  # print a success message
-
-
-# ------------------- Co2 serializer class ----------------------------------------------------------------------------
-class Co2Serializer(serializers.ModelSerializer):
-
-    # redefine datetime in order to specify date format
-    datetime = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S")
-
-    class Meta:
-        model = Co2
-        fields = ['datetime', 'co2_rate']  # '__all__' #
-
-    def create(self, validated_data):
-        return Co2(**validated_data)
 
 
 @api_view(['GET', 'POST'])
