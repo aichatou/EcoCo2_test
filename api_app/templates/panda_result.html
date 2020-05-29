@@ -1,0 +1,41 @@
+<!doctype html> 
+{% load static %}
+<html>
+    <head>
+          <meta charset="utf-8">
+          <title>Panda Result</title>
+    </head>
+  
+    <body> 
+      <h1>Success ! <br> </h1> 
+	  <table border = "1"  >
+	  <tr align="center" height = "45">
+	  <td> <h3>interpolated data - original data </h3></td>
+	  <td> <h3> original data - interpolated data (resample by week) </h3> </td>
+	 
+	  </tr>
+	  <tr>
+	  <td> <img src = "{% static 'datadiff.png' %}"  height="300" width = "500" alt="datadiff(interpol - data)" /> </td>
+      <td> <img src = "{% static 'datadiff_resize_ByWeek.png' %}" height="300"  width = "500" alt="datadiff resize by Week" /> </td>
+	  </tr>
+	  </table>
+	  
+	  <h1> -------------------------------Original data--------------------------------------------------- </h1> 
+	  
+      <p> Co2 Production: <b>{{co2Produc}}</b> </p> 
+      <p> Mean weekday: <b>{{mean_week.0}}</b></p> 
+      <p> Mean weekend: <b>{{mean_week.1}}</b> </p>   
+	  <p> Median season: Winter, Spring, Summer, Fall (respectively):  <b>{{median_season.0}}</b> , <b>{{median_season.1}}</b> , <b>{{median_season.2}}</b> , <b>{{median_season.3}}</b> </p> 
+	  
+	  <h1> -------------------------------Interpolated data------------------------------------------------</h1>
+      <p> Mean weekday: <b>{{interpolated_week.0}}</b></p>
+      <p> Mean weekend: <b>{{interpolated_week.1}}</b></p>
+      <p> Median season: Winter, Spring, Summer, Fall (respectively): <b>{{interpolated_median_season.0}}</b> , <b>{{interpolated_median_season.1}}</b> , 
+      <b>{{interpolated_median_season.2}}</b> , <b>{{interpolated_median_season.3}}</b> </h1>  
+	  
+	  <h3> NB: Interpolated data files (csv_data_interpol.csv, data_interpol.csv ) are located in results folder<br> </h3> 
+
+      <br>
+	  <br>
+    </body>
+</html>
