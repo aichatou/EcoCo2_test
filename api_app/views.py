@@ -92,7 +92,8 @@ def pandaPart(request):
     data_interpol.to_csv('results/data_interpol.csv', sep=';')  # save data interpolated in csv format
 
     # ----------- data difference --------------------------
-    data_diff = data_df2.sub(data_interpol)  # difference between data_df2 and data_interpol
+    data_diff = data_interpol.sub(data_df2, fill_value=0)
+    data_diff_by_week = data_diff.resample('W').mean().interpolate('linear')
     # plot data_diff and save it in png file
     # plt.figure()
     data_diff.plot()
