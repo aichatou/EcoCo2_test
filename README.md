@@ -1,4 +1,4 @@
-# EcoCo2_test
+# Eco
 =====<br />
 poject_name = api_project<br />
 app_name = api_app<br />
